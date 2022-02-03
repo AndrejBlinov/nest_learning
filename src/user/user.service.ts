@@ -1,37 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { RolesService } from 'src/roles/roles.service';
+import { InjectModel } from '@nestjs/sequelize';
 import { createUserDto } from './dto/create-user-dto';
 import { User } from './user.entity';
 
-
 @Injectable()
 export class UserService {
-  constructor(
-    // @InjectRepository(User)
-    // private userRepository: Repository<User>,
-    // private roleService: RolesService
-  ) {}
+  constructor( @InjectModel(User) private userRepository: typeof User ) {}
 
-  // async findAll(): Promise<User[]> {
-  //   return this.userRepository.find();
-  // }
+    async create(dto: createUserDto) {
+      const user = await this.userRepository.create(dto);
+      return user;
+    }
 
-  // async findOne(id: string): Promise<User> {
+    async findAll() {
+      const users = await this.userRepository.findAll();
+      return users
+    }
+
+  // async findOne(id: number): Promise<User> {
   //   return this.userRepository.findOne(id);
   // }
 
-  // async remove(id: number): Promise<number> {
-  //   const result = await this.userRepository.delete(id);
-  //   return result.affected;
-  // }
-
-  // async create(dto: createUserDto) {
-  //   const user = await this.userRepository.insert(dto);
-  //   if (!dto['role']) {
-  //     const role = await this.roleService.getRolesByRolesId(1);
-  //     //await this.userRepository.update(user.raw.insertId, {role: role.id})
-  //   }
-    
-  //   return user;
-  // }
+  async remove(id: number) {
+    // const result = await this.userRepository.destroy();
+    // return result;
+  }
 }
