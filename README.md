@@ -86,5 +86,7 @@ Nest is [MIT licensed](LICENSE).
   4.5 устанавливаем конфигуратор npm i @nestjs/config
 
 5) Документация. Устанавливаем пакет  npm i @nestjs/swagger swagger-ui-express 
+6) распаковываем npm i --save @nestjs/jwt
+7) распаковка npm install bcryptjs
 
 
