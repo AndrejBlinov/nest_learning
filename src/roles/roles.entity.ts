@@ -1,22 +1,29 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Table, Model } from 'sequelize-typescript';
+import {BelongsToMany, Column, DataType, Model, Table} from "sequelize-typescript";
+import {ApiProperty} from "@nestjs/swagger";
+import { User } from "src/user/user.entity";
+import { UserRoles } from "./user-roles.entity";
 
-interface RolesCreateAttr {
-    name: string;
-    value: number;
+
+interface RoleCreationAttrs {
+    value: string;
+    description: string;
 }
 
 @Table({tableName: 'roles'})
-export class Roles extends Model<Roles,RolesCreateAttr> {
-    @ApiProperty({ example: '1', description: "Уникальный идентификатор роли" })
+export class Role extends Model<Role, RoleCreationAttrs> {
+
+    @ApiProperty({example: '1', description: 'Уникальный идентификатор'})
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
-    @ApiProperty({ example: 'Администратор', description: "Наименование роли" })
-    @Column({type: DataType.STRING})
-    name: string;
+    @ApiProperty({example: 'ADMIN', description: 'Уникальное Значение роли '})
+    @Column({type: DataType.STRING, unique: true, allowNull: false})
+    value: string;
 
-    @ApiProperty({ example: '2', description: "Идентификатор роли" })
-    @Column({type: DataType.STRING, allowNull: false, unique: true})
-    value: number;
+    @ApiProperty({example: 'Администратор', description: 'Описание роли'})
+    @Column({type: DataType.STRING, allowNull: false})
+    description: string;
+
+    @BelongsToMany(() => User, () => UserRoles)
+    users: User[];
 }
