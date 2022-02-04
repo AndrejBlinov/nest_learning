@@ -8,7 +8,12 @@ import { RolesModule } from './roles/roles.module';
 import { Role } from "./roles/roles.entity";
 import { UserRoles } from "./roles/user-roles.entity";
 import { AuthModule } from './auth/auth.module';
-import { JwtModule } from "@nestjs/jwt";
+import { PostModule } from './post/post.module';
+import { Post } from "./post/post.entity";
+import { FilesModule } from './files/files.module';
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { join } from "path/posix";
+import * as path from 'path'
 
 @Module( {
     controllers: [],
@@ -24,12 +29,17 @@ import { JwtModule } from "@nestjs/jwt";
               username: process.env.POSTGRES_USER,
               password: process.env.POSTGRES_PASSWORD,
               database: process.env.POSTGRES_DATABASE,
-              models: [User,Role,UserRoles],
+              models: [User,Role,UserRoles,Post],
               autoLoadModels: true
             }),
             UserModule,
             RolesModule,
             AuthModule,
+            PostModule,
+            FilesModule,
+            ServeStaticModule.forRoot({
+              rootPath: path.resolve(__dirname, 'static'),
+            }),
     ]
 })
 export class AppModule {}

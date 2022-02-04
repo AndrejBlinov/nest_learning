@@ -89,5 +89,5 @@ Nest is [MIT licensed](LICENSE).
 6) распаковываем npm i --save @nestjs/jwt
 7) распаковка npm install bcryptjs
 8) распаковываем npm i class-validator class-transformer
-
-
+9) распаковываем npm i uuid
+10) для просмотра файлов распаковываем npm install --save @nestjs/serve-static
