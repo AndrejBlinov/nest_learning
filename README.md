@@ -88,5 +88,6 @@ Nest is [MIT licensed](LICENSE).
 5) Документация. Устанавливаем пакет  npm i @nestjs/swagger swagger-ui-express 
 6) распаковываем npm i --save @nestjs/jwt
 7) распаковка npm install bcryptjs
+8) распаковываем npm i class-validator class-transformer
 
 
