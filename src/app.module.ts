@@ -8,6 +8,7 @@ import { RolesModule } from './roles/roles.module';
 import { Role } from "./roles/roles.entity";
 import { UserRoles } from "./roles/user-roles.entity";
 import { AuthModule } from './auth/auth.module';
+import { JwtModule } from "@nestjs/jwt";
 
 @Module( {
     controllers: [],

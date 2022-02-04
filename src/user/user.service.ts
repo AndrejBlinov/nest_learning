@@ -6,9 +6,7 @@ import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
-  constructor( 
-    @InjectModel(User) private userRepository: typeof User,
-    ) {}
+  constructor( @InjectModel(User) private userRepository: typeof User) {}
 
     async create(dto: createUserDto) {
       const userAuth = await this.getUserByLogin(dto.login)
