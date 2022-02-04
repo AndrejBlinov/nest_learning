@@ -91,3 +91,4 @@ Nest is [MIT licensed](LICENSE).
 8) распаковываем npm i class-validator class-transformer
 9) распаковываем npm i uuid
 10) для просмотра файлов распаковываем npm install --save @nestjs/serve-static
+11) установить Docker https://www.docker.com/products/docker-desktop 
