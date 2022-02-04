@@ -1,6 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { RolesService } from 'src/roles/roles.service';
+import { addRoleDto } from './dto/add-role.dto';
+import { banUserDto } from './dto/ban-user.dto';
 import { createUserDto } from './dto/create-user-dto';
 import { User } from './user.entity';
 
@@ -14,8 +16,10 @@ export class UserService {
           throw new HttpException('Пользователь с таким login уже существует', HttpStatus.BAD_REQUEST)
       }
       const user = await this.userRepository.create(dto);
+
       const roleService = new RolesService();
       const role = await roleService.getRoleByValue('1');
+     
       await user.$set('roles', [role.id]);
       user.roles = [role]
       return user;
@@ -31,6 +35,37 @@ export class UserService {
       return users[0];
     }
 
+    async getUserById(id: number) {
+      const user = await this.userRepository.findByPk(id);
+      if (user) {
+        return user;
+      }
+      throw new HttpException('Пользователь не найден',HttpStatus.NOT_FOUND)
+    }
+
+    async addRole(dto: addRoleDto) {
+      const user = await this.userRepository.findByPk(dto.userId);
+      const roleService = new RolesService();
+      const role = await roleService.getRoleByValue(dto.value);
+      
+      if (user && role) {
+        await user.$add('role', [role.id]);
+        return dto;
+      }
+      throw new HttpException('Пользователь или роль не найдены',HttpStatus.NOT_FOUND)
+    }
+
+    async banUser(dto: banUserDto) {
+      const user = await this.userRepository.findByPk(dto.userId);
+      if (user) {
+        user.banned = true;
+        user.bannedReason = dto.banReason;
+        await user.save();
+        return user;
+      }
+      throw new HttpException('Пользователь не найден',HttpStatus.NOT_FOUND)
+    }
+    
     async findOne(id: number): Promise<User> {
       return this.userRepository.findOne({where: {id: id}});
     }
