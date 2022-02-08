@@ -30,7 +30,9 @@ import * as path from 'path'
               password: '0a144c2055c9b8e25c2aaed6f94f64ac30c34d6832b559568080ff5a0a503676', //process.env.POSTGRES_PASSWORD,
               database: 'dc61uob1tnl54s',//process.env.POSTGRES_DATABASE,
               models: [User,Role,UserRoles,Post],
-              autoLoadModels: true
+              autoLoadModels: true,
+              native: true,
+              ssl: true,
             }),
             UserModule,
             RolesModule,
