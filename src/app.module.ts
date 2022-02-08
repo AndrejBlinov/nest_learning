@@ -33,6 +33,12 @@ import * as path from 'path'
               autoLoadModels: true,
               native: true,
               ssl: true,
+              dialectOptions: {
+                ssl: {
+                    require: true,
+                    rejectUnauthorized: false
+                }
+              }
             }),
             UserModule,
             RolesModule,
