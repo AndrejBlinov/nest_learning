@@ -5,7 +5,7 @@ import { AppModule } from "./app.module";
 
 
 async function start() {
-    const PORT = process.env.PORT || 5000;
+    const PORT = process.env.PORT || 8080;
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
     const config = new DocumentBuilder()

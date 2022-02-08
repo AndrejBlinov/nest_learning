@@ -24,11 +24,11 @@ import * as path from 'path'
             }),
             SequelizeModule.forRoot({
               dialect: 'postgres',
-              host: process.env.POSTGRES_HOST,
-              port: Number(process.env.POSTGRES_PORT),
-              username: process.env.POSTGRES_USER,
-              password: process.env.POSTGRES_PASSWORD,
-              database: process.env.POSTGRES_DATABASE,
+              host: 'ec2-52-31-219-113.eu-west-1.compute.amazonaws.com',//process.env.POSTGRES_HOST,
+              port: 5432, //Number(process.env.POSTGRES_PORT),
+              username: 'vourrjzsmhtcpn', //process.env.POSTGRES_USER,
+              password: '0a144c2055c9b8e25c2aaed6f94f64ac30c34d6832b559568080ff5a0a503676', //process.env.POSTGRES_PASSWORD,
+              database: 'dc61uob1tnl54s',//process.env.POSTGRES_DATABASE,
               models: [User,Role,UserRoles,Post],
               autoLoadModels: true
             }),
