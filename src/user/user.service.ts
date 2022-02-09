@@ -25,6 +25,21 @@ export class UserService {
       return user;
     }
 
+    async addAdmin(dto: createUserDto) {
+      const userAuth = await this.getUserByLogin(dto.login)
+      if (userAuth) {
+          throw new HttpException('Пользователь с таким login уже существует', HttpStatus.BAD_REQUEST)
+      }
+      const user = await this.userRepository.create(dto);
+
+      const roleService = new RolesService();
+      const role = await roleService.getRoleByValue('2');
+     
+      await user.$set('roles', [role.id]);
+      user.roles = [role]
+      return user;
+    }
+
     async findAll() {
       const users = await this.userRepository.findAll( {include: {all: true}} );
       return users

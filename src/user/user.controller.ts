@@ -66,4 +66,11 @@ export class UserController {
     delete (@Body() id: number) {
         return this.userService.remove(id);
     }
+
+    @ApiOperation({ summary: "Создание администратора" })
+    @ApiResponse({ status: 200})
+    @Post('/admin')
+    addAdmin(@Body() dto: createUserDto) {
+        return this.userService.addAdmin(dto);
+    }
 }

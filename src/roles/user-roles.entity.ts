@@ -16,7 +16,7 @@ export class UserRoles extends Model<UserRoles> {
     userId: number;
 
     @ForeignKey(() => Role)
-    @ApiProperty({ example: '2', description: "ID роли" })
+    @ApiProperty({ example: 2, description: "ID роли" })
     @Column({type: DataType.INTEGER})
     rolesId: number;
 }

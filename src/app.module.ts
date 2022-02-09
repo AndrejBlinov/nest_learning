@@ -31,12 +31,12 @@ import * as path from 'path'
               database: process.env.POSTGRES_DATABASE,
               models: [User,Role,UserRoles,Post],
               autoLoadModels: true,
-              dialectOptions: {
-                ssl: {
-                    require: true,
-                    rejectUnauthorized: false
-                }
-              }
+              // dialectOptions: {
+              //   ssl: {
+              //       require: true,
+              //       rejectUnauthorized: false
+              //   }
+              // }
             }),
             UserModule,
             RolesModule,
